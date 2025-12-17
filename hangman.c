@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 
+
 typedef struct {
     int id;
     char palavra[50];
@@ -20,7 +21,7 @@ storage p;
     database = fopen("database.txt", "r");
 
     if(database == NULL){
-        printf("Arquivo não existe\n");
+        printf("Arquivo nÃ£o existe\n");
         getchar();
         exit(0);
     }
@@ -31,19 +32,19 @@ storage p;
         token = strtok(words, ";");
        p.id = atoi(token);
        if (p.id == id_sorteado){
-    printf("O id secreto escolhido é: = %d |", id_sorteado);
+    printf("O id secreto escolhido Ã©: = %d |", id_sorteado);
 
         token = strtok(NULL, ";");
         strcpy(p.palavra, token);
-    printf("A palavra é = %s |", p.palavra);
+    printf("A palavra Ã© = %s |", p.palavra);
 
         token = strtok(NULL, ";");
         strcpy(p.dica, token);
-    printf("A palavra é = %s |", p.dica);
+    printf("A palavra Ã© = %s |", p.dica);
 
         token = strtok(NULL, ";");
         p.nivel = atoi(token);
-    printf("O nível é = %d \n", p.nivel);
+    printf("O nÃ­vel Ã© = %d \n", p.nivel);
         
     }
     }
