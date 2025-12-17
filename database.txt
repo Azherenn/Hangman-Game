@@ -1,3 +1,23 @@
-1;ABACAXI;FRUTA COM COROA;1
-2;TECLADO;PERIFERICO;2
-3;UVA;FRUTA PEQUENA E ROXA;1
+1;ABACAXI;FRUTA;1
+2;TECLADO;PERIFÉRICO;2
+3;UVA;Fruta pequena e roxa;1
+4;SOL;Estrela que aquece a Terra;1
+5;BOLA;Objeto redondo usado em esportes;1
+6;MALA;Usada para carregar roupas na viagem;1
+7;PATO;Ave que nada e faz qua-qua;1
+8;ROSA;Flor popular e perfumada;1
+9;GATO;Animal de estimação que mia;1
+10;CADEIRA;Móvel para sentar;2
+11;JANELA;Abertura na parede para luz e ar;2
+12;GUITARRA;Instrumento musical de cordas;2
+13;FLORESTA;Lugar com muitas árvores;2
+14;PLANETA;Corpo celeste como a Terra ou Marte;2
+15;CASTELO;Residência fortificada de reis;2
+16;VAMPIRO;Monstro lendário que bebe sangue;2
+17;ASTRONAUTA;Viajante do espaço;3
+18;HELICOPTERO;Aeronave com hélices no topo;3
+19;ORNITORRINCO;Mamífero que põe ovos;3
+20;ENGENHARIA;Área que projeta e constrói coisas;3
+21;UNIVERSIDADE;Instituição de ensino superior;3
+22;XILOFONE;Instrumento musical de percussão;3
+23;LABIRINTO;Caminho confuso e difícil de sair;3

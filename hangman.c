@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct {
     int id;
@@ -11,7 +12,9 @@ typedef struct {
 
 int main() {
 
- storage p;
+srand(time(NULL));
+ int id_sorteado = (rand() % 23) +1;
+storage p;
 
     FILE *database;
     database = fopen("database.txt", "r");
@@ -24,21 +27,26 @@ int main() {
     char words[100];
     char *token;
     while(fgets (words, 100, database) !=NULL){
+
         token = strtok(words, ";");
        p.id = atoi(token);
-    printf("O id é: = %d\n", p.id);
+       if (p.id == id_sorteado){
+    printf("O id secreto escolhido é: = %d |", id_sorteado);
+
         token = strtok(NULL, ";");
         strcpy(p.palavra, token);
-    printf("A palavra é = %s\n", p.palavra);
+    printf("A palavra é = %s |", p.palavra);
+
         token = strtok(NULL, ";");
         strcpy(p.dica, token);
-    printf("A dica é: = %s\n", p.dica);
+    printf("A palavra é = %s |", p.dica);
+
         token = strtok(NULL, ";");
         p.nivel = atoi(token);
-    printf("O nível é: = %d\n", p.nivel);
-        token = strtok(NULL, ";");
+    printf("O nível é = %d \n", p.nivel);
+        
+    }
     }
     fclose(database);
-
     return 0;
 }
