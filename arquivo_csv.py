@@ -6,4 +6,3 @@ df = pd.read_sql("SELECT * FROM hangman_game", conexao)
 df.to_csv("database.txt", sep=';', index=False, header=False)
 conexao.close()
 
-print("SUCESSO")
