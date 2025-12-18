@@ -15,6 +15,10 @@ int main() {
 srand(time(NULL));
  int id_sorteado = (rand() % 23) +1;
 storage p;
+size_t tam;
+char mask[50];
+char chute;
+int right = 0;
 
     FILE *database;
     database = fopen("database.txt", "r");
@@ -35,11 +39,13 @@ storage p;
 
         token = strtok(NULL, ";");
         strcpy(p.palavra, token);
+        tam = strlen(p.palavra);
     printf("A palavra é = %s |", p.palavra);
+    printf("A quantidade de letra é: %zu ", tam);
 
         token = strtok(NULL, ";");
         strcpy(p.dica, token);
-    printf("A palavra é = %s |", p.dica);
+    printf("A dica é = %s |", p.dica);
 
         token = strtok(NULL, ";");
         p.nivel = atoi(token);
@@ -48,5 +54,14 @@ storage p;
     }
     }
     fclose(database);
+
+//     for (;;){
+//             printf(mask);
+// scanf("Digite uma letra:");
+// if (p.palavra == chute){
+// printf("Acertou a palavra");
+// printf(chute[i]);
+// }
+//     }
     return 0;
 }
