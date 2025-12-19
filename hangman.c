@@ -11,6 +11,18 @@ typedef struct {
     int nivel;
 } storage;
 
+
+void criarMascara(char *palavra, char *mascara) {
+        int tamanho = strlen(palavra);
+
+        for(int i = 0; i < tamanho; i++){
+            mascara[i] = '_';
+     }
+
+    mascara[tamanho] = '\0'; //serve para reconhecer o final da string.
+
+    }
+
 int main() {
 
 srand(time(NULL));
@@ -25,7 +37,7 @@ int right = 0;
     database = fopen("database.txt", "r");
 
     if(database == NULL){
-        printf("Arquivo nÃ£o existe\n");
+        printf("Arquivo não existe\n");
         getchar();
         exit(0);
     }
@@ -36,10 +48,17 @@ int right = 0;
         token = strtok(words, ";");
        p.id = atoi(token);
        if (p.id == id_sorteado){
-    printf("O id secreto escolhido Ã©: = %d |", id_sorteado);
+    printf("O id secreto escolhido é: = %d |", id_sorteado);
 
         token = strtok(NULL, ";");
         strcpy(p.palavra, token);
+
+        //TESTAR MASCARA
+        criarMascara(p.palavra, mask); 
+        printf("Palavra: %s\n", p.palavra);
+        printf("Mascara: %s\n", mask);
+        ///////////////////
+        
         tam = strlen(p.palavra);
     printf("A palavra é = %s |", p.palavra);
     printf("A quantidade de letra é: %zu ", tam);
@@ -50,7 +69,7 @@ int right = 0;
 
         token = strtok(NULL, ";");
         p.nivel = atoi(token);
-    printf("O nÃ­vel Ã© = %d \n", p.nivel);
+    printf("O nível é = %d \n", p.nivel);
         
     }
     }
@@ -64,5 +83,8 @@ int right = 0;
 // printf(chute[i]);
 // }
 //     }
+
+    
+
     return 0;
 }
