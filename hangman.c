@@ -40,13 +40,6 @@ int right = 0;
 
         token = strtok(NULL, ";");
         strcpy(p.palavra, token);
-<<<<<<< HEAD
-    printf("A palavra Ã© = %s |", p.palavra);
-
-        token = strtok(NULL, ";");
-        strcpy(p.dica, token);
-    printf("A palavra Ã© = %s |", p.dica);
-=======
         tam = strlen(p.palavra);
     printf("A palavra é = %s |", p.palavra);
     printf("A quantidade de letra é: %zu ", tam);
@@ -54,7 +47,6 @@ int right = 0;
         token = strtok(NULL, ";");
         strcpy(p.dica, token);
     printf("A dica é = %s |", p.dica);
->>>>>>> 673bbf77586e9c2a8183a5e08bad423286a52b10
 
         token = strtok(NULL, ";");
         p.nivel = atoi(token);
