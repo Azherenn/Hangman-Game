@@ -90,7 +90,7 @@ void desenharForca(int erros, char *mascara){
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\n"); 
+        printf("|     /|\\\n"); 
         printf("|      |\n");
         printf("|     /\n");
         printf("|     %s\n", mascara);
@@ -101,9 +101,9 @@ void desenharForca(int erros, char *mascara){
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\n"); 
+        printf("|     /|\\\n"); 
         printf("|      |\n");
-        printf("|     /\n");
+        printf("|     /\\\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
