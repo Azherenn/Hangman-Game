@@ -23,6 +23,95 @@ void criarMascara(char *palavra, char *mascara) {
 
     }
 
+
+void desenharForca(int erros, char *mascara){
+    switch (erros){
+        case 0: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|      \n");
+        printf("|\n"); 
+        printf("|\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 1: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|\n"); 
+        printf("|\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 2: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|      |\n"); 
+        printf("|\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 3: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|      |\n"); 
+        printf("|      |\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 4: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|     /|\n"); 
+        printf("|      |\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 5: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|     /|\\\n"); 
+        printf("|      |\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 6: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|     /|\n"); 
+        printf("|      |\n");
+        printf("|     /\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+        case 7: 
+        printf("-------\n");
+        printf("|/     |\n");
+        printf("|     (_)\n");
+        printf("|     /|\n"); 
+        printf("|      |\n");
+        printf("|     /\n");
+        printf("|     %s\n", mascara);
+        printf("\n");
+        break;
+
+    }
+}
+
+
 int main() {
 
 srand(time(NULL));
@@ -44,7 +133,7 @@ int right = 0;
     char words[100];
     char *token;
     while(fgets (words, 100, database) !=NULL){
-
+desenharForca(7, mask);
         token = strtok(words, ";");
        p.id = atoi(token);
        if (p.id == id_sorteado){
@@ -58,7 +147,7 @@ int right = 0;
         printf("Palavra: %s\n", p.palavra);
         printf("Mascara: %s\n", mask);
         ///////////////////
-        
+
         tam = strlen(p.palavra);
     printf("A palavra é = %s |", p.palavra);
     printf("A quantidade de letra é: %zu ", tam);
@@ -72,6 +161,8 @@ int right = 0;
     printf("O nível é = %d \n", p.nivel);
         
     }
+
+
     }
     fclose(database);
 
