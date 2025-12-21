@@ -111,6 +111,43 @@ void desenharForca(int erros, char *mascara){
     }
 }
 
+void carregarBanco(storage *p, int id_procurado){
+    FILE *database;
+    database = fopen("database.txt", "r");
+
+    if(database == NULL){
+        printf("Arquivo não existe\n");
+        getchar();
+        exit(0);
+    }
+    
+    char words[100];
+    char *token;
+    
+    while(fgets (words, 100, database) !=NULL){
+        token = strktok(words, ";");
+        p->id = atoi(token);
+
+        if(p->id == id_procurado){
+            token = strtok(NULL, ";");
+            strcpy(p->palavra, token); 
+            
+            criarMascara(p->palavra, mask);
+
+            token = strtok(NULL, ";");
+            strcpy(p->dica, token);
+
+            token = strtok(NULL, ";");
+            p->nivel = atoi(token);
+
+            break;
+        }
+
+
+    }
+ 
+    fclose(database);
+}
 
 int main() {
 
@@ -122,7 +159,9 @@ char mask[50];
 char chute;
 int right = 0;
 
-    FILE *database;
+    carregarBanco(&p, id_sorteado, mask);
+
+   /* FILE *database;
     database = fopen("database.txt", "r");
 
     if(database == NULL){
@@ -164,7 +203,7 @@ desenharForca(7, mask);
 
 
     }
-    fclose(database);
+    fclose(database);*/
 
 //     for (;;){
 //             printf(mask);
