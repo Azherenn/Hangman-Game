@@ -2,135 +2,141 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 
-typedef struct {
+typedef struct
+{
     int id;
     char palavra[50];
     char dica[100];
     int nivel;
-} storage;
+} caixa;
 
+void criarMascara(char *palavra, char *mascara)
+{
+    int tamanho = strlen(palavra);
 
-void criarMascara(char *palavra, char *mascara) {
-        int tamanho = strlen(palavra);
-
-        for(int i = 0; i < tamanho; i++){
-            mascara[i] = '_';
-     }
-
-    mascara[tamanho] = '\0'; //serve para reconhecer o final da string.
-
+    for (int i = 0; i < tamanho; i++)
+    {
+        mascara[i] = '_';
     }
 
+    mascara[tamanho] = '\0'; // serve para reconhecer o final da string.
+}
 
-void desenharForca(int erros, char *mascara){
-    switch (erros){
-        case 0: 
+void desenharForca(int erros, char *mascara)
+{
+    switch (erros)
+    {
+    case 0:
         printf("-------\n");
         printf("|/     |\n");
         printf("|      \n");
-        printf("|\n"); 
+        printf("|\n");
         printf("|\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 1: 
+    case 1:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|\n"); 
+        printf("|\n");
         printf("|\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 2: 
+    case 2:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|      |\n"); 
+        printf("|      |\n");
         printf("|\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 3: 
+    case 3:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|      |\n"); 
+        printf("|      |\n");
         printf("|      |\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 4: 
+    case 4:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\n"); 
+        printf("|     /|\n");
         printf("|      |\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 5: 
+    case 5:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\\\n"); 
+        printf("|     /|\\\n");
         printf("|      |\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 6: 
+    case 6:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\\\n"); 
+        printf("|     /|\\\n");
         printf("|      |\n");
         printf("|     /\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
 
-        case 7: 
+    case 7:
         printf("-------\n");
         printf("|/     |\n");
         printf("|     (_)\n");
-        printf("|     /|\\\n"); 
+        printf("|     /|\\\n");
         printf("|      |\n");
         printf("|     /\\\n");
         printf("|     %s\n", mascara);
         printf("\n");
         break;
-
     }
 }
 
-void carregarBanco(storage *p, int id_procurado, char *mascara){
+void carregarBanco(caixa *p, int id_procurado, char *mascara)
+{
     FILE *database;
     database = fopen("database.txt", "r");
 
-    if(database == NULL){
+    if (database == NULL)
+    {
         printf("Arquivo não existe\n");
         getchar();
         exit(0);
     }
-    
+
     char words[100];
     char *token;
-    
-    while(fgets (words, 100, database) !=NULL){
+
+    while (fgets(words, 100, database) != NULL)
+    {
         token = strtok(words, ";");
         p->id = atoi(token);
 
-        if(p->id == id_procurado){
+        if (p->id == id_procurado)
+        {
             token = strtok(NULL, ";");
-            strcpy(p->palavra, token); 
-            
+            strcpy(p->palavra, token);
+
             criarMascara(p->palavra, mascara);
 
             token = strtok(NULL, ";");
@@ -141,25 +147,90 @@ void carregarBanco(storage *p, int id_procurado, char *mascara){
 
             break;
         }
-
     }
- 
+
     fclose(database);
 }
 
-int main() {
+void limparTela()
+{
+#ifdef _WIN32
+    system("cls"); // Windows
+#else
+    system("clear"); // Linux ou Mac
+#endif
+}
 
-srand(time(NULL));
- int id_sorteado = (rand() % 23) +1;
-storage p;
-size_t tam;
-char mask[50];
-char chute;
+int main()
+{
 
-carregarBanco(&p, id_sorteado, mask);
+    int vida = 7;
+    int ganhou = 0;
+    int acertou = 0;
+    char errado[26];
+    int qtd_erros = 0;
 
-printf("DEBUG: Palavra Sorteada: %s\n", p.palavra);
-    desenharForca(0, mask);
+    srand(time(NULL));
+    int id_sorteado = (rand() % 23) + 1;
+    caixa p;
+    char mask[50];
 
+    carregarBanco(&p, id_sorteado, mask);
+
+    char chute;
+    do
+    {
+        limparTela();
+        desenharForca(7 - vida, mask);
+        printf("\nDica: %s\n", p.dica);
+        if (qtd_erros > 0)
+        {
+            printf("Erros: ");
+            for (int k = 0; k < qtd_erros; k++)
+            {
+                printf("%c ", errado[k]);
+            }
+            printf("\n");
+        }
+        printf("Digite uma letra\n");
+        scanf(" %c", &chute);
+        chute = toupper(chute);
+        while (getchar() != '\n')
+            ;
+        acertou = 0;
+        for (int i = 0; i < strlen(p.palavra); i++)
+        {
+            if (p.palavra[i] == chute)
+            {
+                mask[i] = chute;
+                acertou = 1;
+            }
+        }
+        if (acertou == 0)
+        {
+            vida--;
+            errado[qtd_erros] = chute;
+            qtd_erros++;
+            printf("Você errou bobão\n");
+            getchar();
+        }
+        if (strcmp(mask, p.palavra) == 0)
+        {
+            ganhou = 1;
+        }
+    } while (vida > 0 && ganhou == 0);
+
+    limparTela();
+
+    if (ganhou)
+    {
+        desenharForca(7 - vida, mask);
+        printf("Parabéns vencedor, ganhou o jogo");
+    }
+    else
+    {
+        desenharForca(7, mask);
+        printf("Perdeu no jogo, tente mais depois\n");
+    }
     return 0;
 }
