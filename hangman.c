@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-
 typedef struct {
     int id;
     char palavra[50];
@@ -111,7 +110,7 @@ void desenharForca(int erros, char *mascara){
     }
 }
 
-void carregarBanco(storage *p, int id_procurado){
+void carregarBanco(storage *p, int id_procurado, char *mascara){
     FILE *database;
     database = fopen("database.txt", "r");
 
@@ -125,14 +124,14 @@ void carregarBanco(storage *p, int id_procurado){
     char *token;
     
     while(fgets (words, 100, database) !=NULL){
-        token = strktok(words, ";");
+        token = strtok(words, ";");
         p->id = atoi(token);
 
         if(p->id == id_procurado){
             token = strtok(NULL, ";");
             strcpy(p->palavra, token); 
             
-            criarMascara(p->palavra, mask);
+            criarMascara(p->palavra, mascara);
 
             token = strtok(NULL, ";");
             strcpy(p->dica, token);
@@ -142,7 +141,6 @@ void carregarBanco(storage *p, int id_procurado){
 
             break;
         }
-
 
     }
  
@@ -157,64 +155,11 @@ storage p;
 size_t tam;
 char mask[50];
 char chute;
-int right = 0;
 
-    carregarBanco(&p, id_sorteado, mask);
+carregarBanco(&p, id_sorteado, mask);
 
-   /* FILE *database;
-    database = fopen("database.txt", "r");
-
-    if(database == NULL){
-        printf("Arquivo não existe\n");
-        getchar();
-        exit(0);
-    }
-    char words[100];
-    char *token;
-    while(fgets (words, 100, database) !=NULL){
-desenharForca(7, mask);
-        token = strtok(words, ";");
-       p.id = atoi(token);
-       if (p.id == id_sorteado){
-    printf("O id secreto escolhido é: = %d |", id_sorteado);
-
-        token = strtok(NULL, ";");
-        strcpy(p.palavra, token);
-
-        //TESTAR MASCARA
-        criarMascara(p.palavra, mask); 
-        printf("Palavra: %s\n", p.palavra);
-        printf("Mascara: %s\n", mask);
-        ///////////////////
-
-        tam = strlen(p.palavra);
-    printf("A palavra é = %s |", p.palavra);
-    printf("A quantidade de letra é: %zu ", tam);
-
-        token = strtok(NULL, ";");
-        strcpy(p.dica, token);
-    printf("A dica é = %s |", p.dica);
-
-        token = strtok(NULL, ";");
-        p.nivel = atoi(token);
-    printf("O nível é = %d \n", p.nivel);
-        
-    }
-
-
-    }
-    fclose(database);*/
-
-//     for (;;){
-//             printf(mask);
-// scanf("Digite uma letra:");
-// if (p.palavra == chute){
-// printf("Acertou a palavra");
-// printf(chute[i]);
-// }
-//     }
-
-    
+printf("DEBUG: Palavra Sorteada: %s\n", p.palavra);
+    desenharForca(0, mask);
 
     return 0;
 }
