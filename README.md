@@ -1,52 +1,60 @@
-# Hangman Game in C
-A classic command-line Hangman game, built with pure C. This project serves as a foundational exercise in C programming
+# 🕵️‍♂️ Hangman Game in C (Jogo da Forca)
 
---
+A robust command-line Hangman game built with pure C. This project demonstrates core programming concepts such as file handling, memory management, structs, and cross-platform compatibility.
 
-## 🔍 Overview
+## 🌟 Key Features
 
-This is a fully command-line based Hangman game application. The program will choose a random word from a file, and the player will try to guess the word, letter by letter, before the hangman is fully drawn. The project is implemented in C without external libraries beyond the standard library.
+- **Cross-Platform:** Runs natively on both Windows and Linux (auto-detects OS for screen clearing).
+- **Database System:** Reads words, IDs, difficulty levels, and **contextual tips** from an external `database.txt` file.
+- **Robust Input Handling:**
+  - Automatic uppercase conversion.
+  - Keyboard buffer cleaning to prevent input errors.
+  - History tracking of incorrect guesses.
+- **Dynamic Gameplay:**
+  - Visual feedback with ASCII art.
+  - Win/Loss detection logic.
+  - Tip display to help the player.
 
-## 🎯 Project Goals
+## 🛠️ Technical Concepts Applied
 
-* Master the fundamentals of the C language, including file operations, memory allocation, and string handling.
-* Develop a complete, playable game from scratch.
-* Practice a professional development workflow using Git for version control and a Makefile for compilation.
-
-## 🏗️ Functional Requirements
-### Core Features
-* Read a list of words from an external text file.
-* Select a random word from the list for each new game.
-*  Display the hidden word on the screen using underscores (e.g., `_ _ _ _ _`).
-* Ask the player for a letter input.
-* Check if the guessed letter is in the word.
-    * If correct, reveal the letter in the hidden word.
-    * If incorrect, increment the error count and draw the next part of the hangman.
-* Keep track of already guessed letters to avoid repeated guesses.
-* End the game when the player wins (guesses the word) or loses (reaches the maximum number of errors).
-* Display a clear win/loss message at the end.
-### Visual & User Experience
-* Display a welcome header for the game.
-* Show the hangman's state using ASCII art, which updates with each error.
-* Clearly display the hidden word, the number of remaining lives/guesses, and the letters already tried.
----
+- **Structs:** organized data management for game objects.
+- **Pointers:** efficient memory manipulation and string passing.
+- **File I/O:** `fopen`, `fgets`, and string parsing with `strtok`.
+- **Preprocessor Directives:** `#ifdef` for OS-specific commands.
 
 ## 🚀 How to Compile and Run
 
 ### Prerequisites
-To compile and run this project, you will need `gcc` (or a similar C compiler) and `make` installed on your system.
+You need a C compiler (like GCC) installed.
 
-### Compilation
-1.  Clone the repository to your local machine.
-2.  Navigate into the project directory.
-3.  Run the `make` command:
-    ```sh
-    make
-    ```
-    This will create the executable file named `forca`.
-
-### Running the Game
-To start the game, run the executable from your terminal:
-```sh
-./forca
+### 1. Clone the repository
+```bash
+git clone https://github.com/Azherenn/Hangman-Game.git
+cd Hangman-Game
 ```
+
+
+### 2. Compile
+Use `gcc` to compile the source code.
+
+```bash
+gcc main.c -o hangman
+```
+
+*(On Windows, this automatically creates hangman.exe)*
+
+### 3. Run
+Make sure `database.txt` is in the same folder as the executable.
+```
+./hangman
+```
+*(Or just `hangman.exe` on Windows cmd)*
+
+## 📂 Project Structure
+
+- `main.c`: Contains the game logic, main loop, and UI functions.
+- `database.txt`: Stores the words and tips (Format: `ID;WORD;TIP;LEVEL`).
+
+## 👤 Author
+
+Developed by **[Magno / Ricardo]** as a portfolio project for C programming.
