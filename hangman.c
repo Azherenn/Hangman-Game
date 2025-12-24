@@ -161,8 +161,9 @@ void limparTela()
 #endif
 }
 
-int main()
-{
+int main(){
+
+do {
 
     int vida = 7;
     int ganhou = 0;
@@ -181,6 +182,11 @@ int main()
     do
     {
         limparTela();
+        
+        printf("AVISOS!\n");
+        printf("Caso o jogador escreva uma palavra, será considerada apenas a primeira letra\n");
+        printf("O jogo só aceita letras, então não adianta chutar a palavra toda!\n\n");
+
         desenharForca(7 - vida, mask);
         printf("\nDica: %s\n", p.dica);
         if (qtd_erros > 0)
@@ -192,11 +198,19 @@ int main()
             }
             printf("\n");
         }
-        printf("Digite uma letra\n");
+
+    do{
+        printf("Digite uma letra: ");
         scanf(" %c", &chute);
         chute = toupper(chute);
-        while (getchar() != '\n')
-            ;
+        while (getchar() != '\n');
+
+        if(!isalpha(chute)){
+            printf("\nErro! Digite apenas letras de A a Z.\n\n");
+        }
+
+        }while (!isalpha(chute)); 
+
         acertou = 0;
         for (int i = 0; i < strlen(p.palavra); i++)
         {
@@ -211,7 +225,7 @@ int main()
             vida--;
             errado[qtd_erros] = chute;
             qtd_erros++;
-            printf("Você errou bobão\n");
+            printf("\nVocê errou! Aperte enter para continuar.\n");
             getchar();
         }
         if (strcmp(mask, p.palavra) == 0)
@@ -225,12 +239,17 @@ int main()
     if (ganhou)
     {
         desenharForca(7 - vida, mask);
-        printf("Parabéns vencedor, ganhou o jogo");
+        printf("Parabéns! Você ganhou!");
     }
     else
     {
         desenharForca(7, mask);
-        printf("Perdeu no jogo, tente mais depois\n");
+        printf("Perdeu! Tente novamente!\n");
     }
+
+    printf("Pressione ENTER para jogar novamente ou feche o jogo.\n");
+
+    } while (getchar() == '\n');
+
     return 0;
 }
